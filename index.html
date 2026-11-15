@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saphal Sharma · Agricultural Economist</title>
+<meta name="description" content="Saphal Sharma: agricultural economist (M.Sc. Sustainable International Agriculture, University of Göttingen). Farm efficiency, sustainability and crop data with R, Python and SQL.">
+<meta property="og:title" content="Saphal Sharma · Agricultural Economist">
+<meta property="og:description" content="Farm efficiency, sustainability and crop data. Projects, live apps and reports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Field notebook: deep crop-green ink on a pale sage page, barley-gold for highlights */
+  --bg: #f3f5f1;
+  --surface: #ffffff;
+  --ink: #17231c;
+  --muted: #56645b;
+  --line: #d8ded6;
+  --accent: #1f5c3f;
+  --accent-soft: #e2ede6;
+  --gold: #a67a14;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Layout: one centred column, max 980px; cards in auto-fit grids that stack on phones */
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111814; --surface: #18211c; --ink: #e6ede8; --muted: #9eb0a5; --line: #2a372f;
+          --accent: #7cc29d; --accent-soft: #1f2e26; --gold: #e0b450; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+nav .brand { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--ink); text-decoration: none; }
+nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; font-size: 15px; }
+nav ul a { color: var(--muted); text-decoration: none; }
+nav ul a:hover { color: var(--accent); }
+header.hero { padding: 64px 0 36px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 0 0 16px; text-wrap: balance; }
+.lede { font-size: 20px; color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.chip { font-size: 14px; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { color: var(--accent); background: transparent; }
+section { padding: 44px 0; border-top: 1px solid var(--line); }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 30px; margin: 0 0 6px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 24px; max-width: 65ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.card h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 0; }
+.card p { margin: 0; font-size: 15.5px; color: var(--muted); }
+.card .result { font-size: 15px; color: var(--ink); border-left: 3px solid var(--gold); padding-left: 10px; }
+.card .tools { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.card .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; font-weight: 600; font-size: 15px; }
+.card.live { border-color: var(--accent); }
+.badge { align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--accent); color: var(--bg); }
+.card img { width: 100%; height: 170px; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+.timeline { display: grid; gap: 18px; }
+.item { display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+@media (max-width: 600px) { .item { grid-template-columns: 1fr; gap: 2px; } }
+.item .when { font-family: var(--font-mono); font-size: 13.5px; color: var(--muted); padding-top: 3px; }
+.item h3 { font-size: 18px; margin: 0; font-weight: 600; }
+.item p { margin: 2px 0 0; color: var(--muted); font-size: 15.5px; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.skills h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); margin: 0 0 6px; font-weight: 600; }
+.skills ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+.contact { display: flex; gap: 12px; flex-wrap: wrap; }
+footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Saphal Sharma</a>
+    <ul>
+      <li><a href="#apps">Live apps</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Agricultural economist · Göttingen, Germany</p>
+    <h1>Turning field trials, farm surveys and FAO data into better decisions</h1>
+    <p class="lede">I hold an M.Sc. in Sustainable International Agriculture from the University of Göttingen. I work on farm efficiency, sustainability and crop performance, using R, Python and SQL to answer the questions farmers, breeders and policymakers actually face.</p>
+    <div class="chips">
+      <span class="chip">Efficiency analysis (DEA)</span>
+      <span class="chip">Variety trials &amp; G×E</span>
+      <span class="chip">Carbon accounting</span>
+      <span class="chip">Food security data</span>
+      <span class="chip">Open to work</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn ghost" href="https://github.com/saphal-sharma">GitHub profile</a>
+    </div>
+  </header>
+</div>
+
+<section id="apps">
+  <div class="wrap">
+    <h2>Try my tools</h2>
+    <p class="sub">Three interactive web apps that run in your browser. No sign-up or installation needed.</p>
+    <div class="grid">
+      <article class="card live">
+        <span class="badge">Live app</span>
+        <h3>SeedGenius Variety Selector</h3>
+        <p>Pick a trial site and the season's rainfall and temperature to see which barley varieties a weather-aware model ranks highest.</p>
+        <p class="result">Picks the best variety in 39% of unseen trials, compared with 30% for "choose the best average".</p>
+        <p class="tools">Python · scikit-learn · SHAP</p>
+        <div class="links"><a href="https://saphal-sharma.github.io/seedgenius/">Open app</a><a href="https://github.com/saphal-sharma/seedgenius">Code</a></div>
+      </article>
+      <article class="card live">
+        <span class="badge">Live app</span>
+        <h3>AgroCarbon Farm Calculator</h3>
+        <p>Enter a farm's fertilizer, fuel and electricity use to get its greenhouse-gas footprint, then test changes like cutting nitrogen or diesel.</p>
+        <p class="result">IPCC Tier 1 methods, checked against hand calculations with unit tests.</p>
+        <p class="tools">JavaScript · Python · pytest</p>
+        <div class="links"><a href="https://saphal-sharma.github.io/agrocarbon/">Open app</a><a href="https://github.com/saphal-sharma/agrocarbon">Code</a></div>
+      </article>
+      <article class="card live">
+        <span class="badge">Live map</span>
+        <h3>FoodSecurity Atlas</h3>
+        <p>An interactive world map comparing cereal yields, yield trends, harvest volatility and population growth, combined into a transparent risk index.</p>
+        <p class="result">Covers 176 countries. Africa's median risk is almost twice Europe's.</p>
+        <p class="tools">SQL (SQLite) · Python · Plotly</p>
+        <div class="links"><a href="https://saphal-sharma.github.io/foodsecurity-atlas/">Open map</a><a href="https://github.com/saphal-sharma/foodsecurity-atlas">Code</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Research projects</h2>
+    <p class="sub">Analyses of real published data, each with code you can run and a written report.</p>
+    <div class="grid">
+      <article class="card">
+        <img src="img/maize_gge_biplot.png" alt="GGE biplot of 17 maize hybrids across 12 environments" loading="lazy">
+        <h3>Variety trial analysis</h3>
+        <p>Yield stability, genotype-by-environment interaction and mixed-model heritability for maize and rapeseed trials.</p>
+        <p class="result">The environment explained 77% of maize yield variation. The top-yielding hybrid was not the most stable one.</p>
+        <p class="tools">R · lme4 · GGE biplot</p>
+        <div class="links"><a href="reports/variety_trial_report.pdf">Report (PDF)</a><a href="https://github.com/saphal-sharma/maize-variety-trial-analysis">Code</a></div>
+      </article>
+      <article class="card">
+        <img src="img/salba_dose_response.png" alt="Dose-response curves of glyphosate and bentazone on white mustard" loading="lazy">
+        <h3>Herbicide dose-response</h3>
+        <p>Log-logistic models, effective doses and relative potency from greenhouse and field efficacy trials.</p>
+        <p class="result">Bentazone was 2.3 times more potent than glyphosate on white mustard (95% CI 1.9–2.9).</p>
+        <p class="tools">Python · R · SciPy</p>
+        <div class="links"><a href="reports/dose_response_report.pdf">Report (PDF)</a><a href="https://github.com/saphal-sharma/herbicide-dose-response">Code</a></div>
+      </article>
+      <article class="card">
+        <img src="img/yield_vs_land_by_region.png" alt="Cereal yield and land use indices by world region since 1961" loading="lazy">
+        <h3>Global yield gaps</h3>
+        <p>Where world food production growth came from since 1961, and where crop yield gaps remain largest.</p>
+        <p class="result">About 88% of cereal production growth came from higher yields. Sub-Saharan Africa expanded land instead.</p>
+        <p class="tools">Python · FAO data</p>
+        <div class="links"><a href="reports/policy_brief_yield_gaps.pdf">Policy brief (PDF)</a><a href="https://github.com/saphal-sharma/global-yield-gaps-fao">Code</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Education and experience</h2>
+    <div class="timeline">
+      <div class="item">
+        <div class="when">2026</div>
+        <div><h3>M.Sc. Sustainable International Agriculture</h3><p>Georg-August-Universität Göttingen. Thesis: <em>Technical Efficiency vs. Eco-Efficiency in Vietnamese Vegetable Farming</em>, a Data Envelopment Analysis of 420 certified and uncertified cabbage farms.</p></div>
+      </div>
+      <div class="item">
+        <div class="when">2022 – 2026</div>
+        <div><h3>Research Student Assistant</h3><p>University of Kassel, Organic Agriculture &amp; Crop Production. Root treatment work in the TRIO, RIBA and SIGNAL research projects.</p></div>
+      </div>
+      <div class="item">
+        <div class="when">2019</div>
+        <div><h3>Project Surveyor</h3><p>Agriculture Sector Development Project, Surkhet, Nepal.</p></div>
+      </div>
+      <div class="item">
+        <div class="when">Nepal</div>
+        <div><h3>B.Sc. Agriculture</h3><p>Tribhuvan University, Nepal.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h3>Analysis</h3><ul><li>Efficiency analysis (DEA, Tobit)</li><li>Mixed models, heritability, G×E</li><li>Dose-response modelling</li><li>Machine learning with SHAP</li></ul></div>
+      <div><h3>Agriculture</h3><ul><li>Field trials and farm surveys</li><li>Farm management economics</li><li>Carbon accounting (IPCC)</li><li>Irrigation and crop water use (FAO-56)</li></ul></div>
+      <div><h3>Tools</h3><ul><li>R, Python, SQL</li><li>Excel models</li><li>Plotly, ggplot2, matplotlib</li><li>Git and GitHub</li></ul></div>
+      <div><h3>Languages</h3><ul><li>Nepali (native)</li><li>English (fluent)</li><li>Hindi (fluent)</li><li>German (learning)</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p class="sub">I am looking for roles in agricultural research, agribusiness and international development, in Germany or internationally.</p>
+    <div class="contact">
+      <a class="btn primary" href="https://github.com/saphal-sharma">GitHub: saphal-sharma</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Saphal Sharma · Built with plain HTML and hosted on GitHub Pages</div>
+</footer>
+</body>
+</html>
