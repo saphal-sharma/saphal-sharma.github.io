@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: food security and agricultural development · Saphal Sharma</title>
+<meta name="description" content="Case study for food security, policy and development roles: global yield gaps, a food production risk atlas for 176 countries and farm efficiency research, by Saphal Sharma.">
+<meta property="og:title" content="Where is food production at risk? A food security case study">
+<meta property="og:description" content="Yield gaps since 1961, a transparent risk index for 176 countries and farm-level efficiency, on FAO and World Bank data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Field notebook: deep crop-green ink on a pale sage page, barley-gold for highlights */
+  --bg: #f3f5f1;
+  --surface: #ffffff;
+  --ink: #17231c;
+  --muted: #56645b;
+  --line: #d8ded6;
+  --accent: #1f5c3f;
+  --accent-soft: #e2ede6;
+  --gold: #a67a14;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Layout: one centred column, max 980px; cards in auto-fit grids that stack on phones */
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111814; --surface: #18211c; --ink: #e6ede8; --muted: #9eb0a5; --line: #2a372f;
+          --accent: #7cc29d; --accent-soft: #1f2e26; --gold: #e0b450; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+nav .brand { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--ink); text-decoration: none; }
+nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; font-size: 15px; }
+nav ul a { color: var(--muted); text-decoration: none; }
+nav ul a:hover { color: var(--accent); }
+header.hero { padding: 64px 0 36px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 0 0 16px; text-wrap: balance; }
+.lede { font-size: 20px; color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.chip { font-size: 14px; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { color: var(--accent); background: transparent; }
+section { padding: 44px 0; border-top: 1px solid var(--line); }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 30px; margin: 0 0 6px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 24px; max-width: 65ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.card h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 0; }
+.card p { margin: 0; font-size: 15.5px; color: var(--muted); }
+.card .result { font-size: 15px; color: var(--ink); border-left: 3px solid var(--gold); padding-left: 10px; }
+.card .tools { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.card .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; font-weight: 600; font-size: 15px; }
+.card.live { border-color: var(--accent); }
+.badge { align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--accent); color: var(--bg); }
+.card img { width: 100%; height: 170px; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+.timeline { display: grid; gap: 18px; }
+.item { display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+@media (max-width: 600px) { .item { grid-template-columns: 1fr; gap: 2px; } }
+.item .when { font-family: var(--font-mono); font-size: 13.5px; color: var(--muted); padding-top: 3px; }
+.item h3 { font-size: 18px; margin: 0; font-weight: 600; }
+.item p { margin: 2px 0 0; color: var(--muted); font-size: 15.5px; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.skills h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); margin: 0 0 6px; font-weight: 600; }
+.skills ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+.contact { display: flex; gap: 12px; flex-wrap: wrap; }
+footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+<style>
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 8px 0 6px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.kpi .n { font-family: var(--font-display); font-size: 38px; font-weight: 600; color: var(--accent); line-height: 1.1; }
+.kpi .t { font-size: 15px; color: var(--muted); }
+.step { display: grid; grid-template-columns: 48px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: 0; }
+.step .num { font-family: var(--font-mono); font-size: 14px; color: var(--gold); padding-top: 6px; }
+.step h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+.step p { margin: 4px 0; color: var(--muted); font-size: 16px; }
+.step .res { color: var(--ink); border-left: 3px solid var(--gold); padding-left: 12px; margin: 10px 0; }
+.step img { max-width: min(100%, 620px); display: block; border: 1px solid var(--line); border-radius: 8px; background: #fff; margin-top: 8px; }
+.links { display: flex; gap: 16px; flex-wrap: wrap; font-weight: 600; font-size: 15px; margin-top: 6px; }
+table.map { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+table.map th, table.map td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.map th { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+.tablewrap { overflow-x: auto; }
+@media (max-width: 560px) { .step { grid-template-columns: 1fr; gap: 0; } }
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./">Saphal Sharma</a>
+    <ul><li><a href="./">Home</a></li><li><a href="#work">The work</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Case study · Food security and agricultural development</p>
+    <h1>Where can more food come from, and who is most at risk?</h1>
+    <p class="lede">Food security work starts with two questions: where is production falling behind, and how can farms produce more with fewer inputs? I answered them at three levels, from 60 years of global FAO data to country risk maps and individual farms, with code, tests and plain-language briefs.</p>
+    <div class="kpis"><div class="kpi"><div class="n">88%</div><div class="t">of world cereal production growth since 1961 that came from higher yields, not more land</div></div><div class="kpi"><div class="n">105 / 168</div><div class="t">countries producing less than half the maize yield of the top 10% of countries</div></div><div class="kpi"><div class="n">0.68 vs 0.36</div><div class="t">median food production risk index, Africa vs Europe (0 = low, 1 = high)</div></div></div>
+  </header>
+
+<section id="work">
+  <h2>The work, step by step</h2>
+  <p class="sub">Real published data, open code, and automated tests that confirm the reported results.</p>
+
+  <div class="step"><div class="num">01</div><div>
+    <h3>Find where growth came from</h3>
+    <p>FAO cereal data 1961–2018: production growth split into yield and land (production = yield × land), by region.</p>
+    <p class="res">About 88% of world growth came from higher yields. Sub-Saharan Africa more than doubled its cereal area instead, with less than half of its growth from yields: the clearest case for investing in yields there.</p>
+    <img src="img/yield_vs_land_by_region.png" alt="Cereal yield and land use indices by world region since 1961" loading="lazy">
+    <div class="links"><a href="reports/policy_brief_yield_gaps.pdf">Policy brief (PDF)</a><a href="https://github.com/saphal-sharma/global-yield-gaps-fao">Code</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">02</div><div>
+    <h3>Measure yield gaps and input returns</h3>
+    <p>Country yields for maize, wheat and rice against the 90th-percentile country, and median cereal yield by band of nitrogen use.</p>
+    <p class="res">105 of 168 countries reach less than half the top maize yields (10.1 t/ha). Yield rises steeply from under 25 kg N/ha (1.6 t/ha) to 50–100 kg N/ha (4.2 t/ha), with only 0.4 t/ha more above that: the biggest gains are where fertilizer use is lowest.</p>
+    <img src="img/nitrogen_vs_yield_global.png" alt="Cereal yield against nitrogen use by country" loading="lazy">
+    <div class="links"><a href="https://github.com/saphal-sharma/global-yield-gaps-fao">Code and tests</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">03</div><div>
+    <h3>Map production risk for 176 countries</h3>
+    <p>FoodSecurity Atlas: FAO and World Bank indicators loaded into SQLite, each ranked across countries in SQL and averaged into a transparent risk index, shown on an interactive map.</p>
+    <p class="res">Africa's median risk (0.68) is almost twice Europe's (0.36). The highest-risk countries combine low or falling yields, volatile harvests and fast population growth. The index measures production risk, not hunger itself, and the page says so.</p>
+    <img src="img/app_atlas.jpg" alt="World map of the food production risk index" loading="lazy">
+    <div class="links"><a href="https://saphal-sharma.github.io/foodsecurity-atlas/">Open the map</a><a href="https://github.com/saphal-sharma/foodsecurity-atlas">Code</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">04</div><div>
+    <h3>Look at efficiency on real farms</h3>
+    <p>My M.Sc. thesis: technical efficiency and eco-efficiency of 420 certified and uncertified cabbage farms in Vietnam, with Data Envelopment Analysis and Tobit regression. AgroCarbon applies the same thinking to farm emissions.</p>
+    <p class="res">Fertilizer accounted for about 82–98% of the estimated emissions on the Vietnamese vegetable farms, so better nitrogen management is where efficiency and climate goals meet.</p>
+    <div class="links"><a href="https://saphal-sharma.github.io/agrocarbon/">Farm carbon calculator</a></div>
+  </div></div>
+</section>
+
+<section id="skills">
+  <h2>What this shows</h2>
+  <div class="tablewrap"><table class="map">
+    <thead><tr><th>Typical requirement</th><th>Where you can see it</th></tr></thead>
+    <tbody><tr><td>Analysis of FAO and World Bank statistics</td><td>Steps 01–03: FAOSTAT-based yields, land and fertilizer; World Bank population data</td></tr><tr><td>Indicators and composite indices</td><td>Step 03: percentile-ranked, equal-weight index with its limits stated</td></tr><tr><td>Farm-level efficiency analysis</td><td>Step 04: DEA and Tobit regression on 420 farms</td></tr><tr><td>Policy communication</td><td>A two-page policy brief and plain-language summaries</td></tr><tr><td>Data pipelines and reproducibility</td><td>SQL views, Python, automated tests that reproduce the headline numbers</td></tr><tr><td>Languages</td><td>English, Nepali and Hindi; German in progress</td></tr></tbody>
+  </table></div>
+  <p class="sub" style="margin-top:16px">Limits: country-level averages hide differences within countries; the risk index uses equal weights and production indicators; data end in 2018 for some series. These are analyses for discussion, not official assessments.</p>
+</section>
+
+<section id="contact">
+  <h2>Let's talk</h2>
+  <p class="sub">I am completing my M.Sc. in Sustainable International Agriculture at the University of Göttingen and looking for roles in food security, agricultural development and policy research.</p>
+  <div class="cta"><a class="btn primary" href="./">See all my work</a><a class="btn ghost" href="https://github.com/saphal-sharma">GitHub profile</a></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap">© 2026 Saphal Sharma · Data: FAO via Our World in Data; World Bank</div></footer>
+</body>
+</html>

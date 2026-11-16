@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: crop protection and input efficiency · Saphal Sharma</title>
+<meta name="description" content="Case study for crop protection and agronomy roles: herbicide dose-response and potency, effective rates, field trial statistics and farm carbon footprints, by Saphal Sharma.">
+<meta property="og:title" content="How much product is enough? A crop protection case study">
+<meta property="og:description" content="Dose-response modelling, effective rates, trial statistics and input-related emissions, on real published data with automated tests.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Field notebook: deep crop-green ink on a pale sage page, barley-gold for highlights */
+  --bg: #f3f5f1;
+  --surface: #ffffff;
+  --ink: #17231c;
+  --muted: #56645b;
+  --line: #d8ded6;
+  --accent: #1f5c3f;
+  --accent-soft: #e2ede6;
+  --gold: #a67a14;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Layout: one centred column, max 980px; cards in auto-fit grids that stack on phones */
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111814; --surface: #18211c; --ink: #e6ede8; --muted: #9eb0a5; --line: #2a372f;
+          --accent: #7cc29d; --accent-soft: #1f2e26; --gold: #e0b450; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+nav .brand { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--ink); text-decoration: none; }
+nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; font-size: 15px; }
+nav ul a { color: var(--muted); text-decoration: none; }
+nav ul a:hover { color: var(--accent); }
+header.hero { padding: 64px 0 36px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 0 0 16px; text-wrap: balance; }
+.lede { font-size: 20px; color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.chip { font-size: 14px; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { color: var(--accent); background: transparent; }
+section { padding: 44px 0; border-top: 1px solid var(--line); }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 30px; margin: 0 0 6px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 24px; max-width: 65ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.card h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 0; }
+.card p { margin: 0; font-size: 15.5px; color: var(--muted); }
+.card .result { font-size: 15px; color: var(--ink); border-left: 3px solid var(--gold); padding-left: 10px; }
+.card .tools { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.card .links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; font-weight: 600; font-size: 15px; }
+.card.live { border-color: var(--accent); }
+.badge { align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--accent); color: var(--bg); }
+.card img { width: 100%; height: 170px; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+.timeline { display: grid; gap: 18px; }
+.item { display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+@media (max-width: 600px) { .item { grid-template-columns: 1fr; gap: 2px; } }
+.item .when { font-family: var(--font-mono); font-size: 13.5px; color: var(--muted); padding-top: 3px; }
+.item h3 { font-size: 18px; margin: 0; font-weight: 600; }
+.item p { margin: 2px 0 0; color: var(--muted); font-size: 15.5px; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.skills h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); margin: 0 0 6px; font-weight: 600; }
+.skills ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+.contact { display: flex; gap: 12px; flex-wrap: wrap; }
+footer { padding: 28px 0 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+<style>
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 8px 0 6px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.kpi .n { font-family: var(--font-display); font-size: 38px; font-weight: 600; color: var(--accent); line-height: 1.1; }
+.kpi .t { font-size: 15px; color: var(--muted); }
+.step { display: grid; grid-template-columns: 48px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: 0; }
+.step .num { font-family: var(--font-mono); font-size: 14px; color: var(--gold); padding-top: 6px; }
+.step h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+.step p { margin: 4px 0; color: var(--muted); font-size: 16px; }
+.step .res { color: var(--ink); border-left: 3px solid var(--gold); padding-left: 12px; margin: 10px 0; }
+.step img { max-width: min(100%, 620px); display: block; border: 1px solid var(--line); border-radius: 8px; background: #fff; margin-top: 8px; }
+.links { display: flex; gap: 16px; flex-wrap: wrap; font-weight: 600; font-size: 15px; margin-top: 6px; }
+table.map { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+table.map th, table.map td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.map th { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+.tablewrap { overflow-x: auto; }
+@media (max-width: 560px) { .step { grid-template-columns: 1fr; gap: 0; } }
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./">Saphal Sharma</a>
+    <ul><li><a href="./">Home</a></li><li><a href="#work">The work</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Case study · Crop protection and agronomy</p>
+    <h1>How much product is enough, and what does it cost the climate?</h1>
+    <p class="lede">Crop protection and agronomy teams have to show that a product works, at which rate, and with what side effects. I worked through those questions with published trial data, from dose-response curves to the greenhouse-gas footprint of inputs, and checked every result against an independent method or the original publication.</p>
+    <div class="kpis"><div class="kpi"><div class="n">2.3×</div><div class="t">higher potency of bentazone than glyphosate on white mustard (95% CI 1.9–2.9)</div></div><div class="kpi"><div class="n">2.13</div><div class="t">rate units for 90% larkspur control with picloram, about half the highest rate tested</div></div><div class="kpi"><div class="n">77%</div><div class="t">of a wheat field's footprint linked to nitrogen in the AgroCarbon example (illustrative inputs)</div></div></div>
+  </header>
+
+<section id="work">
+  <h2>The work, step by step</h2>
+  <p class="sub">Real published data, open code, and automated tests that confirm the reported results.</p>
+
+  <div class="step"><div class="num">01</div><div>
+    <h3>Compare active ingredients</h3>
+    <p>Glyphosate and bentazone on white mustard (Christensen et al., 2003): four-parameter log-logistic models with shared limits, ED10, ED50 and ED90 with delta-method confidence intervals, and relative potency.</p>
+    <p class="res">Bentazone reached 50% effect at 29 g/ha against 67 g/ha for glyphosate, 2.3 times more potent. Its curve was also much steeper (slope 5.1 vs 2.4), so its window between weak and full effect is narrower: rate accuracy matters more.</p>
+    <img src="img/salba_dose_response.png" alt="Dose-response curves for glyphosate and bentazone on white mustard" loading="lazy">
+    <div class="links"><a href="reports/dose_response_report.pdf">Report (PDF)</a><a href="https://github.com/saphal-sharma/herbicide-dose-response">Code</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">02</div><div>
+    <h3>Set an effective field rate</h3>
+    <p>Picloram on tall larkspur (Turner et al., 1992): logistic regression on kill counts, with the rates for 50%, 90% and 95% control and their confidence intervals.</p>
+    <p class="res">90% control at rate 2.13 (95% CI 1.88–2.38), about half the highest rate tested. The model matches the coefficients published for this dataset, and the Python fit was reproduced in R.</p>
+    <img src="img/larkspur_efficacy.png" alt="Logistic curve of larkspur control against picloram rate" loading="lazy">
+    <div class="links"><a href="https://github.com/saphal-sharma/herbicide-dose-response">Code and tests</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">03</div><div>
+    <h3>Read field trials correctly</h3>
+    <p>Multi-environment trial statistics on maize and rapeseed: ANOVA partition, stability analysis, GGE biplot and mixed-model heritability in R.</p>
+    <p class="res">Environment explained 77% of maize yield variation, and the top-yielding hybrid was not the most stable. For rapeseed, heritability was only 0.08: the trials could not separate the varieties, a reminder to check trial power before claiming a difference.</p>
+    <div class="links"><a href="reports/variety_trial_report.pdf">Report (PDF)</a><a href="https://github.com/saphal-sharma/maize-variety-trial-analysis">Code</a></div>
+  </div></div>
+
+  <div class="step"><div class="num">04</div><div>
+    <h3>Put a number on the climate cost of inputs</h3>
+    <p>AgroCarbon: IPCC Tier 1 footprint of fertilizer, lime, diesel and electricity per hectare and per tonne, with scenarios such as cutting the nitrogen rate or reducing tillage. Python with unit tests, plus a browser calculator.</p>
+    <p class="res">In both examples, nitrogen dominates the footprint (77% for wheat, 89% for cabbage). Cutting the N rate by 20% saves 15–18%; reduced tillage only 1–4%. Inputs are illustrative round numbers, not measured farm data.</p>
+    <img src="img/footprint_scenarios.png" alt="Bar chart of farm emissions by source under different scenarios" loading="lazy">
+    <div class="links"><a href="https://saphal-sharma.github.io/agrocarbon/">Try the calculator</a><a href="https://github.com/saphal-sharma/agrocarbon">Code</a></div>
+  </div></div>
+</section>
+
+<section id="skills">
+  <h2>What this shows</h2>
+  <div class="tablewrap"><table class="map">
+    <thead><tr><th>Typical requirement</th><th>Where you can see it</th></tr></thead>
+    <tbody><tr><td>Dose-response and efficacy analysis</td><td>Steps 01 and 02: log-logistic and logistic models, ED values, relative potency</td></tr><tr><td>Statistics with confidence intervals</td><td>Delta-method intervals, potency ratio with CI, rates for 50/90/95% control</td></tr><tr><td>Field trial design and analysis</td><td>Step 03: variance partition, stability, heritability</td></tr><tr><td>Sustainability and regulation awareness</td><td>Step 04: IPCC Tier 1 emissions, scenario comparison</td></tr><tr><td>R and Python, reproducible work</td><td>Python models cross-checked in R; automated tests on every project</td></tr><tr><td>Clear reporting</td><td>Short PDF reports and plain-language summaries for each project</td></tr></tbody>
+  </table></div>
+  <p class="sub" style="margin-top:16px">Limits: published research datasets, not company trials; the carbon examples use illustrative inputs; no resistance or residue data. These are method demonstrations.</p>
+</section>
+
+<section id="contact">
+  <h2>Let's talk</h2>
+  <p class="sub">I am completing my M.Sc. in Sustainable International Agriculture at the University of Göttingen and looking for roles in crop protection, agronomy and field trial analysis.</p>
+  <div class="cta"><a class="btn primary" href="./">See all my work</a><a class="btn ghost" href="https://github.com/saphal-sharma">GitHub profile</a></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap">© 2026 Saphal Sharma · Data: drc and agridat R packages (Christensen et al. 2003; Turner et al. 1992; Kang &amp; Gorman 1989; Shafii &amp; Price 1998); IPCC 2019 Refinement</div></footer>
+</body>
+</html>
